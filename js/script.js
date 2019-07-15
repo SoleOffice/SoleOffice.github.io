@@ -1,7 +1,6 @@
 // This is the script file
 
 // Exports
-/* exported on_send_message_action */
 
 // doc ready action
 $(function() {
@@ -124,68 +123,4 @@ $(function() {
 
 });
 /*End Fn*/
-
-/* My functions */
-function generate_message_form_html(name, email, msg)
-{
-	"use strict";
-	
-	var htmlStr = "";
-	
-	htmlStr += '<!DOCTYPE html>';
-	htmlStr += '<html lang="en">';
-	htmlStr += '<head>';
-	htmlStr += '    <meta charset="utf-8">';
-	htmlStr += '    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">';
-	htmlStr += '</head>';
-	htmlStr += '<body style="margin: 0; padding: 0; display:none;">';
-	htmlStr += '	<form id="gen-formspree-simple-frm" name="gen-formspree-simple-contact-form" accept-charset="utf-8" action="https://formspree.io/macinsight@outlook.com" method="post" target="_self">';
-	htmlStr += '		<input type="text" name="name" value="' + name + '">';
-	htmlStr += '		<input type="email" name="email" value="' + email + '">';
-	htmlStr += '		<textarea id="gen-formspree-comment" name="message" rows="20" required="required">' + msg + '</textarea>';
-	htmlStr += '		<button type="submit">Send</button>';
-	htmlStr += '	</form>';
-	htmlStr += '	<script type="text/javascript">';
-	htmlStr += '	   function gen_simulate_submit() {';
-	htmlStr += '			"use strict"; ';
-	htmlStr += '			var formEle = document.getElementById("gen-formspree-simple-frm"); ';
-	htmlStr += '            formEle.submit(); ';
-	htmlStr += '	   }';
-	htmlStr += '	</script>';
-	htmlStr += '</body>';
-	htmlStr += '</html>';
-
-	return htmlStr;
-}
-
-
-/* handle user click send message button */
-function on_send_message_action()
-{
-	"use strict";
-	
-	var uname = $("#my-contact-user-name").val();
-	var umail = $("#my-contact-user-email").val();
-	var umsg  = $("#my-contact-message").val();
-	
-	var gen_html = generate_message_form_html(uname, umail, umsg);
-	
-	// set the height of the popoup modal window container box
-	var win_height = $(window).height();
-	var msg_height = (win_height < 500) ? 250 : Math.round(win_height - 250);
-	$('#my_inline_frame_leave_msg_box').height(msg_height);
-
-	// replace the generated html to inline frame
-	$('#my_inline_frame_leave_a_message').attr("srcdoc", gen_html);
-	
-	// show
-	$('#myLeaveMessageModalCenter').modal('show');
-	
-	// When shown, do a simulate submit action.
-	$('#myLeaveMessageModalCenter').on('shown.bs.modal', function (e) {
-  		// do something...
-		document.getElementById('my_inline_frame_leave_a_message').contentWindow.gen_simulate_submit();
-	});
-}
-
 
