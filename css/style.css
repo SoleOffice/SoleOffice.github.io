@@ -1035,6 +1035,13 @@ a.title:hover img {
 	} 
   }
 
+.my-pricing-currency-symbol
+{
+	font-weight: 400;
+	font-size: 1.3rem;
+	padding-right: 2px;
+}
+
 /*
 .my-row-eq-height
 {
